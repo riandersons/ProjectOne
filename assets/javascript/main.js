@@ -3,8 +3,21 @@
 
 //Click handlers
 //using the on click function event, it allows the user to hit enter on the keyboard and it registers the search 
-$("#runSearch-we-need-to-define-this-id-first").on("click", function (event){
-//#runSearch is a potential id name 
+$("#occupation").on("click", function (event){
+
+// Grab value from User input field
+const OcupationInput = $('input').val();
+const blsAPIKey
+// URL for ajex query
+const queryURL = "https:api.bls.gov/publicAPI/v2/timeseries/data/?registrationkey=" +
+blsAPIKey + "&seriesid=series1";
+$.ajax({
+    url: queryURL,
+    method: "GET"
+}).then(function (response) {
+    const results = response;
+    console.log(response);
+})
     //prevents page from reloading on form submit
     event.preventDefault();
 
