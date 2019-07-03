@@ -1,23 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Occupational outlook</title>
-    <!-- jquery link -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <!-- jquery link -->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous">
+        </script>
+
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 
 </head>
+
 <body>
-    <input class="form-control" id="occupation" type="text" placeholder="Enter Occupation Here">
-    <button class="btn btn-primary" id="submitOccupation" type="submit">Submit</button>
 
-    <div id="results"></div>
+    <div class=container>
+        <div class="row">
+            <h1>Occupational Outlook</h1>
+        </div>
 
-<!-- link to javascript logic -->
+
+        <div class="mainPage">
+            <input class="form-control" id="occupation" type="text" placeholder="Enter Occupation Here">
+            <button class="btn btn-primary" id="submitOccupation" type="submit">Submit</button>
+        </div>
+    </div>
+    
+    <!-- We can place the table here -->
+    <div class="container">
+        <div class="card">
+            <div class="card-body">
+                <div id="searches"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- link to javascript logic -->
     <script src="assets/javascript/main.js"></script>
 
 </body>
+
 </html>
