@@ -1,7 +1,5 @@
 $('document').ready(function() {
 
-    
-    
     //Click handlers
     //using the on click function event, it allows the user to hit enter on the keyboard and it registers the search 
     $("#submitOccupation").on("click", function (event) {
@@ -34,8 +32,6 @@ $('document').ready(function() {
 
         // Append data to HTML
         
-
-
     });
 
     //empties the region associated with the article 
