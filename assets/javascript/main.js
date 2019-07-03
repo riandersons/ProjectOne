@@ -24,33 +24,42 @@ $('document').ready(function () {
 
 
             // empty variables that will have data assigned to them
-            
-            //Array of objects to retrieve from api
-            const searchArray = ['city', 'medianPay', 'avgPay', 'demand', 'growthProjection', 'education'];
+                     
             // const city = "";
             // const medianPay;
             // const avgPay;
             // const demand;
             // const growthProjection;
-
-
-            //function to populate table - Feel free to update it as it seems fit
-            function populateTable (searchArray, areaToAddTo){
-                $(areaToAddTo).empty();
-                for (let i=0; i<searchArray.length; i++){
-                    const a = $('<table>');
-                    a.text(searchArray[i]);  
+            
+            // const jobSearch = {
+            //     city: city,
+            //     medianPay: medianPay,
+            //     averagePay: avgPay,
+            //     demand: demand,
+            //     growth: growthProjection,
+                
+    //function to populate table - Feel free to update it as it seems fit
+        const table = '';
+        const rows = 5;
+        const cols = 3
+        for(let r=0; r<rows; r++){
+            table += '<tr>';
+                for (let c =0; c<cols; c++)
+                {
+                    table+='<td>' + c + '</td>';
                 }
-            }
+            table +='</tr>';
+        }
+        document.write('<table>' + table + '</table>');
+                    
 
             // Append data to HTML
-                $('#searches').append();
-        });
+
 
         //empties the region associated with the article 
        
 
     });
 
-
+    });
 })
