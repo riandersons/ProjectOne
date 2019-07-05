@@ -8,7 +8,7 @@ $('document').ready(function () {
         event.preventDefault();
 
         //pull information from form and build the query URL
-        const OcupationInput = $('input').val().trim();
+        const OcupationInput = $('#occupation').val().trim();
         console.log('Occupation entered:  ' + OcupationInput);
 
         $('#city').html(city);
@@ -52,7 +52,7 @@ $('document').ready(function () {
             console.log(growthProjection);
 
             //empties the region associated with the article 
-            $("#submitOccupation").val().clear();
+            $("#occupation").val().clear();
         });
     });
 });
