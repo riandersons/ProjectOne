@@ -17,27 +17,67 @@
 
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+    <style>
+        /* Table column width */
+        #results-table th,
+        td {
+            display: inline-block;
+            width: 20%;
+        }
+        
+    </style>
 </head>
 
 <body>
 
     <div class=container>
         <div class="row">
-            <h1>Occupational Outlook</h1>
+            <h1 class="text-center">Occupational Outlook</h1>
         </div>
-    
 
-    <div class="mainPage">
-        <input class="form-control" id="occupation" type="text" placeholder="Enter Occupation Here
+
+        <div class="mainPage">
+            <input class="form-control" id="occupation" type="text" placeholder="Enter Occupation Here
         ">
-        <button class="btn btn-primary" id="submitOccupation" type="submit">Submit</button>
+            <button class="btn btn-primary" id="submitOccupation" type="submit">Submit</button>
+        </div>
     </div>
-</div>
+    <br>
+    
+    <!-- Setting up display area for results -->
+    <div class=container>
+                <div class="row">
+            <div class="col-md-12">               
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Results</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm table-hover" id='results-table'>
+                            <thead>
+                                <tr>
+                                    <th scope="col">City </th>
+                                    <th scope="col" class="number">Median Pay </th>
+                                    <th scope="col" class="number">Average Pay</th>
+                                    <th scope="col" class="number">Demand </th>
+                                    <th scope="col">Growth % </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- New rows inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
 
 
     <!-- link to javascript logic -->
-    <script src="assets/javascript/main.js"></script>
     <script src="assets/javascript/main.js"></script>
 
 </body>
