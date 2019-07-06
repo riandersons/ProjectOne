@@ -7,7 +7,7 @@ $('document').ready(function () {
         event.preventDefault();
 
         //pull information from form and build the query URL
-        const OcupationInput = $('input').val();
+        const OcupationInput = $('input').val().trim();
         const blsAPIKey = "44ac302872a44634a6809cf464899d3e"
         // URL for ajex query
         const queryURL = "https:api.bls.gov/publicAPI/v2/timeseries/data/?registrationkey=" +
