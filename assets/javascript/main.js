@@ -3,32 +3,35 @@ $('document').ready(function () {
 
     //Click handlers
     //using the on click function event, it allows the user to hit enter on the keyboard and it registers the search 
-    $("#submitOccupation").on("click", function (event) {
+    $("#add-occupation").on("click", function (event) {
         //prevents page from reloading on form submit
         event.preventDefault();
 
         //pull information from form and build the query URL
-        const OcupationInput = $('input').val();
+        const OcupationInput = $('#occupation-input').val().trim();
+
+        const zipCode = $("#zip-input").val().trim();
+        // const email = $("#email-input").val().trim();
         console.log('Occupation entered:  ' + OcupationInput);
+        console.log('Zip code entered:  ' + zipCode);
+        // $('#city').html(city);
 
-        $('#city').html(city);
-
-        const blsAPIKey = "44ac302872a44634a6809cf464899d3e"
+        // const blsAPIKey = "44ac302872a44634a6809cf464899d3e"
         // URL for ajex query
-        const queryURL = "https:api.bls.gov/publicAPI/v2/timeseries/data/?registrationkey=" +
-            blsAPIKey + "&seriesid=series1";
+        // const queryURL = "https:api.bls.gov/publicAPI/v2/timeseries/data/?registrationkey=" +
+            // blsAPIKey + "&seriesid=series1";
 
-        $.ajax({
+        // $.ajax({
             // url: queryURL + "&seriesid=OEUN000000056",
-            url: "https://api.bls.gov/publicAPI/v2/timeseries/data/?registrationkey=44ac302872a44634a6809cf464899d3e&catalog=true&startyear=2010&endyear=2014&calculations=true&annualaverage=true",
-            method: "POST"
+            // url: "https://api.bls.gov/publicAPI/v2/timeseries/data/?registrationkey=44ac302872a44634a6809cf464899d3e&catalog=true&startyear=2010&endyear=2014&calculations=true&annualaverage=true",
+            // method: "POST"
             
-        }).then(function (response) {
-            const results = JSON.parse(response);
-            console.log(results);
+        // }).then(function (response) {
+            // const results = JSON.parse(response);
+            // console.log(results);
 
             // empty variables that will have data assigned to them
-            const city = "Anytown";
+            // const zipCode = "85202";
             const medianPay = '75,000';
             const avgPay = '65,000';
             const demand = '3,000';
@@ -37,7 +40,8 @@ $('document').ready(function () {
             
             // Append data to new table row
             let newRow = $("<tr>").append(
-                $("<td>").text(city),
+                $("<td>").text(OcupationInput),
+                $("<td>").text(zipCode),
                 $("<td>").text(medianPay),
                 $("<td>").text(avgPay),
                 $("<td>").text(demand),
@@ -47,7 +51,7 @@ $('document').ready(function () {
                 // Append the new row to the table
                 $("#results-table > tbody").append(newRow);
                 
-                console.log(city);
+                console.log(zipCode);
                 console.log(medianPay);
                 console.log(avgPay);
                 console.log(demand);
@@ -57,7 +61,7 @@ $('document').ready(function () {
                 // clear();
             });
     });
-});
+// });
 
 
 
