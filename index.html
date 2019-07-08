@@ -18,6 +18,15 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <style>
+        .container {
+            text-align: center;
+        }
+
+        .input-field, .btn {
+            text-align: left;
+            float: left;
+        }
+        
         /* Table column width */
         #results-table th,
         td {
@@ -29,48 +38,60 @@
 
 <body>
 
-     <div class=container> 
-        <!-- <div class="row"> -->
-                <!-- <div class="col-md-12"> -->
-            <h2 class="text-center">Occupational Outlook</h2>
-        <!-- </div> -->
-        </div>
+    <div class=container>
+        <h3>Occupational Outlook</h3>
+        <h5>Major Cities - Western US</h5>
+    </div>
 
-<!-- 
-        <div class="mainPage">
-            <input class="form-control" id="occupation" type="text" placeholder="Enter Occupation Here
-        ">
-            <button class="btn btn-primary" id="submitOccupation" type="submit">Submit</button>
-        </div>
-    </div> --> 
-    <br>
+
+    <!-- <br> -->
     <div class=container>
         <div class=row>
-        <div class="col-md-12">
-            <div class="card card-default">
-                <!-- <div class="card-header"> -->
-                    <!-- Occupation Look up -->
-                <!-- </div> -->
-                <div class="card-body">                    
-                    <form role="form">
-                        <div class="form-group row">
-                            <label for="occupation-input"><h6>Occupation:</h6></label>
-                            <input class="form-control" id="occupation-input" type="text">
-                        </div>
-                        <div class="form-group row">
-                            <label for="zip-input"><h6>Zipcode:</h6></label>
-                            <input class="form-control" id="zip-input" type="number">
-                        </div>
-                            <button class="btn btn-default" id="add-occupation" type="submit">Submit</button>
-                    </form>
+
+            <div class="row">
+                <div class="input-field col s8">
+                    <h6>Select occupation from list below:</h6>
+                    <select id="occupation-input">
+                        <option value="" disabled selected>Choose occupation</option>
+                        <option >Carpenter</option>
+                        <option >Plumber</option>
+                        <option >Electrician</option>
+                        <option >Auto Mechanic</option>
+                        <option >Web Developer/Junior</option>
+                        <option >Web Developer/Senior</option>
+                        <option >Welder</option>
+                        <option >Option 8</option>
+                        <option >Option 9</option>
+                        <option >Option 10</option>
+
+                    </select>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="input-field col s8">
+                    <h6>Select City from list below:</h6>
+                    <select id="city-input">
+                        <option value="" disabled selected>Choose city</option>
+                        <option >Los Angeles</option>
+                        <option >San Jose</option>
+                        <option >Seattle</option>
+                        <option >Salt Lake</option>
+                        <option >Las Vegas</option>
+                        <option >Phoenix</option>
+                        <option >Tucson</option>
+                        <option >Albuquerque</option>
+                        <option >Denver</option>
+                        <option >Houston</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn btn-default" id="add-occupation" type="submit">Submit</button>
+           
         </div>
     </div>
-</div>
-
-
-
+    
     <!-- Setting up display area for results -->
     <div class=container>
         <div class="row">
@@ -84,7 +105,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Occupation </th>
-                                    <th scope="col">Zipcode </th>
+                                    <th scope="col">City </th>
                                     <th scope="col" class="number">Median Pay </th>
                                     <th scope="col" class="number">Average Pay</th>
                                     <th scope="col" class="number">Demand </th>
@@ -99,11 +120,7 @@
                 </div>
             </div>
         </div>
-
-
-
     </div>
-
 
     <!-- link to javascript logic -->
     <script src="assets/javascript/main.js"></script>
