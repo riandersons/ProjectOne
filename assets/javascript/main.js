@@ -12,22 +12,11 @@ $('document').ready(function () {
         //prevents page from reloading on form submit
         event.preventDefault();
 
-        $.ajax({
-            type: "GET",
-            url: "https://projectone-863ba.firebaseio.com/Barista",
-            data: "data",
-            dataType: "json",
-            
-        }).then(function(response) {
-            console.log(response)
-        });
-
         //pull information from form and build the query URL
         const occupationInput = $('#occupation-input').val().trim();
         const city = $("#city-input").val().trim();
         let zipCode = 0;
         let jobCode = 0;
-
 
         // Assigning zipCode to City
         if (city === "Phoenix") {
@@ -63,34 +52,43 @@ $('document').ready(function () {
 
         // Assigning jobCode to occupation
         if (occupationInput === 'Carpenter') {
-            jobCode = '0001';
+            jobCode = '472031';
         }
         else if (occupationInput === 'Plumber') {
-            jobCode = '0002';
+            jobCode = '472152';
         }
         else if (occupationInput === 'Electrician') {
-            jobCode = '0002';
+            jobCode = '472111';
         }
         else if (occupationInput === 'Auto Mechanic') {
-            jobCode = '0002';
+            jobCode = '493023';
         }
-        else if (occupationInput === 'Web Developer/Junior') {
-            jobCode = '0002';
+        else if (occupationInput === 'Web Developer') {
+            jobCode = '151134';
         }
-        else if (occupationInput === 'Web Developer/Senior') {
-            jobCode = '0002';
+        else if (occupationInput === 'Database Administrator') {
+            jobCode = '151141';
         }
         else if (occupationInput === 'Welder') {
-            jobCode = '0002';
+            jobCode = '514121';
         }
-        else if (occupationInput === 'Option 8') {
-            jobCode = '0002';
+        else if (occupationInput === 'Bartender') {
+            jobCode = '353011';
         }
-        else if (occupationInput === 'Option 9') {
-            jobCode = '0002';
+        else if (occupationInput === 'Waiter/Waitress') {
+            jobCode = '353031';
         }
-        else if (occupationInput === 'Option 10') {
-            jobCode = '0002';
+        else if (occupationInput === 'Nurse') {
+            jobCode = '291141';
+        }
+        else if (occupationInput === 'Doctor') {
+            jobCode = '291060';
+        }
+        else if (occupationInput === 'Accountant') {
+            jobCode = '132011';
+        }
+        else if (occupationInput === 'Real Estate Agent') {
+            jobCode = '419022';
         }
 
         else formSelect();
@@ -115,22 +113,7 @@ $('document').ready(function () {
         console.log('City entered:  ' + city);
         console.log('Zipcode  :' + zipCode);
         console.log('Jobcode  :' + jobCode);
-        // ------------------------------------------------------
-
-
-        // const blsAPIKey = "44ac302872a44634a6809cf464899d3e"
-        // URL for ajex query
-        // const queryURL = "https:api.bls.gov/publicAPI/v2/timeseries/data/?registrationkey=" +
-        // blsAPIKey + "&seriesid=series1";
-
-        // $.ajax({
-        // url: queryURL + "&seriesid=OEUN000000056",
-        // url: "https://api.bls.gov/publicAPI/v2/timeseries/data/?registrationkey=44ac302872a44634a6809cf464899d3e&catalog=true&startyear=2010&endyear=2014&calculations=true&annualaverage=true",
-        // method: "POST"
-
-        // }).then(function (response) {
-        // const results = JSON.parse(response);
-        // console.log(results);
+ 
 
         // empty variables that will have data assigned to them
 
