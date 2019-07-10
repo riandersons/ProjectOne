@@ -5,8 +5,16 @@ $('document').ready(function () {
     // ---------------------------------------------------
     // Drop down pre-populated occupation and city menus
     $('select').formSelect();
-
     // -----------------------------------------------------
+
+    const medianPay = '';
+    const empPer1000 = '';
+    const numberOf = '';
+    const quotient = '';
+    const avgPay ='';
+
+
+
     //  Submit button listener
     $("#add-occupation").on("click", function (event) {
         //prevents page from reloading on form submit
@@ -142,19 +150,60 @@ $('document').ready(function () {
 
         console.log('Occupation entered:  ' + occupationInput);
         console.log('City entered:  ' + city);
-        console.log('Zipcode  :' + zipCode);
+        console.log('cityCode  :' + cityCode);
         console.log('Jobcode  :' + jobCode);
- 
 
-        // empty variables that will have data assigned to them
+        /* ----------------------------------------------------------------------------------------------
+            BLS AJAX Query SeriesID Syntax= concatenation of the following:
+             Perfix=OE (ocupationEmplyment), SeasonalAjustment=U (unajusted), AreaType=M (metro)
+             areaCode=cityCode, industryCode=000000 (all), ocupationCode=jobCode, dataType=blsDataType;
+                see https://www.bls.gov/help/hlpforma.htm#OE 
+        ---------------------------------------------------------------------------------------------- */
 
-        const medianPay = '75,000';
-        const avgPay = '65,000';
-        const demand = '3,000';
-        const growthProjection = '4';
+        //Varibles for BLS Query
+        const medianAnnual = "13"
+        const empPer1k = "16"
+        const employment = "01"
+        const locationQuotient = "17"
+        const avgAnnual = "04"
+        const blsDataTypes = [medianAnnual, empPer1k, employment, locationQuotient, avgAnnual]
 
+        for (let i = 0; i < blsDataTypes.length; i++) {
+            let blsQuery = 'https://api.bls.gov/publicAPI/v1/timeseries/data/OEUM' +
+                cityCode + "000000" + jobCode + blsDataTypes[i];
+            $.ajax({
+                type: "POST",
+                url: blsQuery,
+                dataType: "JSON",
+                // success: function (response) {
+                //     console.log(blsDataTypes[i], response.status, response.message)
+                //     console.log(response.Results.series)
+                // }
+            }).then(function (response) {
+                console.log(blsQuery)
+                const results = response.Results.series[0].data[0].value;
+                if (blsDataTypes[i] === blsDataTypes[0]) {
+                    medianPay = results;
+                }
+                if (blsDataTypes[i] === blsDataTypes[1]) {
+                    empPer1000 = results;
+                }
+                if (blsDataTypes[i] === blsDataTypes[2]) {
+                    numberOf = results;
+                }
+                if (blsDataTypes[i] === blsDataTypes[3]) {
+                    quotient = results
+                }
+                if (blsDataTypes[i] === blsDataTypes[4]) {
+                    avgPay = results;
+                }
+                const demand = '3,000';
+                const growthProjection = '4';
+                console.log(medianPay);
+            });
+        }
 
-        // Append data to new table row
+       // Append data to new table row
         let newRow = $("<tr>").append(
             $("<td>").text(occupationInput),
             $("<td>").text(city),
@@ -167,15 +216,13 @@ $('document').ready(function () {
         // Prepend the new row to the table
         $("#results-table > tbody").prepend(newRow);
 
-        console.log(city);
-        console.log(zipCode);
-        console.log(medianPay);
-        console.log(avgPay);
-        console.log(demand);
-        console.log(growthProjection);
+        // console.log(city);
+        // console.log(zipCode);
+        // console.log(medianPay);
+        // console.log(avgPay);
+        // console.log(demand);
+        // console.log(growthProjection);
 
-        //empties the region associated with the article 
-        // clear();
     });
 });
 // });
