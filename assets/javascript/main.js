@@ -202,14 +202,28 @@ $('document').ready(function () {
                 if (blsDataTypes[i] === blsDataTypes[4]) {
                     avgPay = results;
                 }
+              
+                console.log(medianPay);
+            });
+        }
 
+        const colURL = "https://notthebureauoflaborstatistics.firebaseio.com/CostOfLiving/City" + city + 
+        ".json?apiKey=AIzaSyAwyehZmSt5W1AAHQwjR3xmd4k4FETcbMo"
+        $.ajax({
+            url: queryURL,
+            method: "GET",
+        }).then(function (data) {
+            const rent = data.MedianTwoBedR
 
+            // Add stuff from Marco's Branch here
+        });
+
+        // Append data to new table row
         let newRow = $("<tr>").append(
             $("<td>").text(occupationInput),
             $("<td>").text(city),
             $("<td>").text(medianPay),
             $("<td>").text(avgPay),
-
             $("<td>").text(''),
             $("<td>").text(''),
 
