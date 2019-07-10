@@ -158,7 +158,7 @@ $('document').ready(function () {
              Perfix=OE (ocupationEmplyment), SeasonalAjustment=U (unajusted), AreaType=M (metro)
              areaCode=cityCode, industryCode=000000 (all), ocupationCode=jobCode, dataType=blsDataType;
                 see https://www.bls.gov/help/hlpforma.htm#OE 
-        ---------------------------------------------------------------------------------------------- */
+        ----------------------------------------------------------------------------------------------- */
 
         //Varibles for BLS Query
         const medianAnnual = "13"
@@ -208,8 +208,10 @@ $('document').ready(function () {
         $.ajax({
             url: queryUTL,
             method: "GET" + city
-        }).then(function (stuff) {
-            do (stuff); //Stuff to be added from Marco's Branch
+        }).then(function (data) {
+            const rent = data.MedianTwoBedR
+
+            // Add stuff from Marco's Branch here
         });
 
         // Append data to new table row
