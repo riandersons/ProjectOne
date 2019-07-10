@@ -1,3 +1,6 @@
+body{
+    background: url(../images/floor-tile.png)
+}
 .container {
     text-align: center;
 }
