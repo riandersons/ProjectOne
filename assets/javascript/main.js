@@ -11,7 +11,7 @@ $('document').ready(function () {
     const empPer1000 = '';
     const numberOf = '';
     const quotient = '';
-    const avgPay ='';
+    const avgPay = '';
 
 
 
@@ -203,25 +203,29 @@ $('document').ready(function () {
             });
         }
 
-       // Append data to new table row
+        const colURL = "https://notthebureauoflaborstatistics.firebaseio.com/CostOfLiving/City" + city + 
+        ".json?apiKey=AIzaSyAwyehZmSt5W1AAHQwjR3xmd4k4FETcbMo"
+        $.ajax({
+            url: queryUTL,
+            method: "GET" + city
+        }).then(function (stuff) {
+            do (stuff); //Stuff to be added from Marco's Branch
+        });
+
+        // Append data to new table row
         let newRow = $("<tr>").append(
             $("<td>").text(occupationInput),
             $("<td>").text(city),
             $("<td>").text(medianPay),
             $("<td>").text(avgPay),
-            $("<td>").text(demand),
-            $("<td>").text(growthProjection),
         );
 
         // Prepend the new row to the table
         $("#results-table > tbody").prepend(newRow);
 
-        // console.log(city);
         // console.log(zipCode);
         // console.log(medianPay);
         // console.log(avgPay);
-        // console.log(demand);
-        // console.log(growthProjection);
 
     });
 });
