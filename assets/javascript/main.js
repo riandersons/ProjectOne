@@ -197,8 +197,8 @@ $('document').ready(function () {
                 if (blsDataTypes[i] === blsDataTypes[4]) {
                     avgPay = results;
                 }
-                const demand = '3,000';
-                const growthProjection = '4';
+                // const demand = '3,000';
+                // const growthProjection = '4';
                 console.log(medianPay);
             });
         }
@@ -209,8 +209,8 @@ $('document').ready(function () {
             $("<td>").text(city),
             $("<td>").text(medianPay),
             $("<td>").text(avgPay),
-            $("<td>").text(demand),
-            $("<td>").text(growthProjection),
+            $("<td>").text(''),
+            $("<td>").text(''),
         );
 
         // Prepend the new row to the table

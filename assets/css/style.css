@@ -15,3 +15,7 @@ td {
     display: inline-block;
     width: 16.66%;
 }
+
+#occupation-input {
+    width: 100%;
+}
