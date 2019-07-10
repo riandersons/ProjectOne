@@ -16,38 +16,69 @@ $('document').ready(function () {
         const occupationInput = $('#occupation-input').val().trim();
         const city = $("#city-input").val().trim();
         let zipCode = 0;
-        let jobCode = 0;
+        let jobCode = '';
+        let cityCode = '';
 
         // Assigning zipCode to City
         if (city === "Phoenix") {
             zipCode = 85001;
+            cityCode = '0038060'
         }
         else if (city === "Los Angeles") {
             zipCode = 90001;
+            cityCode = '0031080'
         }
         else if (city === "San Jose") {
             zipCode = 95123;
+            cityCode = '0041940'
         }
         else if (city === "Seattle") {
             zipCode = 98115;
+            cityCode = '0042660'
         }
         else if (city === "Tucson") {
             zipCode = 85710;
+            cityCode = '0046060'
         }
         else if (city === "Salt Lake") {
             zipCode = 84116;
+            cityCode = '0041620'
         }
         else if (city === "Denver") {
             zipCode = 80219;
+            cityCode = '0019740'
         }
         else if (city === "Albuquerque") {
             zipCode = 87121;
+            cityCode = '0010740'
         }
         else if (city === "Houston") {
             zipCode = 77036;
+            cityCode = '0026420'
         }
         else if (city === "Dallas") {
             zipCode = 75217;
+            cityCode = '0019100'
+        }
+        else if (city === "Las Vegas") {
+            zipCode = 75217;
+            cityCode = '0029820'
+        }
+        else if (city === "New York") {
+            zipCode = 75217;
+            cityCode = '0035620'
+        }
+        else if (city === "Montgomery") {
+            zipCode = 75217;
+            cityCode = '0033860'
+        }
+        else if (city === "Washington DC") {
+            zipCode = 75217;
+            cityCode = '0047900'
+        }
+        else if (city === "Boston") {
+            zipCode = 75217;
+            cityCode = '0071650'
         }
 
         // Assigning jobCode to occupation
