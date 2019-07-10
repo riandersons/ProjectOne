@@ -11,7 +11,10 @@ $('document').ready(function () {
     const empPer1000 = '';
     const numberOf = '';
     const quotient = '';
-    const avgPay ='';
+
+
+    const avgPay = '';
+
 
 
 
@@ -113,6 +116,7 @@ $('document').ready(function () {
         }
         else if (occupationInput === 'Bartender') {
             jobCode = '353011';
+
         }
         else if (occupationInput === 'Waiter/Waitress') {
             jobCode = '353031';
@@ -123,6 +127,7 @@ $('document').ready(function () {
         else if (occupationInput === 'Doctor') {
             jobCode = '291060';
         }
+
         else if (occupationInput === 'Accountant') {
             jobCode = '132011';
         }
@@ -158,7 +163,9 @@ $('document').ready(function () {
              Perfix=OE (ocupationEmplyment), SeasonalAjustment=U (unajusted), AreaType=M (metro)
              areaCode=cityCode, industryCode=000000 (all), ocupationCode=jobCode, dataType=blsDataType;
                 see https://www.bls.gov/help/hlpforma.htm#OE 
-        ---------------------------------------------------------------------------------------------- */
+
+        ----------------------------------------------------------------------------------------------- */
+
 
         //Varibles for BLS Query
         const medianAnnual = "13"
@@ -197,31 +204,23 @@ $('document').ready(function () {
                 if (blsDataTypes[i] === blsDataTypes[4]) {
                     avgPay = results;
                 }
-                // const demand = '3,000';
-                // const growthProjection = '4';
-                console.log(medianPay);
-            });
-        }
 
-       // Append data to new table row
+
         let newRow = $("<tr>").append(
             $("<td>").text(occupationInput),
             $("<td>").text(city),
             $("<td>").text(medianPay),
             $("<td>").text(avgPay),
+
             $("<td>").text(''),
             $("<td>").text(''),
+
         );
 
         // Prepend the new row to the table
         $("#results-table > tbody").prepend(newRow);
 
-        // console.log(city);
-        // console.log(zipCode);
-        // console.log(medianPay);
-        // console.log(avgPay);
-        // console.log(demand);
-        // console.log(growthProjection);
+
 
     });
 });
