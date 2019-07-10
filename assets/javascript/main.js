@@ -206,8 +206,8 @@ $('document').ready(function () {
         const colURL = "https://notthebureauoflaborstatistics.firebaseio.com/CostOfLiving/City" + city + 
         ".json?apiKey=AIzaSyAwyehZmSt5W1AAHQwjR3xmd4k4FETcbMo"
         $.ajax({
-            url: queryUTL,
-            method: "GET" + city
+            url: queryURL,
+            method: "GET" 
         }).then(function (data) {
             const rent = data.MedianTwoBedR
 
