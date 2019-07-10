@@ -96,7 +96,7 @@ $('document').ready(function () {
         //     Los_Angeles : 90001
         // };
         // const zipCode = zip.city;
-        // console.log(zip.city);
+        // console.log(zip[city]);
 
         // ------------------------------------------------------
         // ------------------------------------------------------
