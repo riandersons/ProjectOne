@@ -11,7 +11,10 @@ $('document').ready(function () {
     const empPer1000 = '';
     const numberOf = '';
     const quotient = '';
+
+
     const avgPay = '';
+
 
 
 
@@ -158,7 +161,9 @@ $('document').ready(function () {
              Perfix=OE (ocupationEmplyment), SeasonalAjustment=U (unajusted), AreaType=M (metro)
              areaCode=cityCode, industryCode=000000 (all), ocupationCode=jobCode, dataType=blsDataType;
                 see https://www.bls.gov/help/hlpforma.htm#OE 
+
         ----------------------------------------------------------------------------------------------- */
+
 
         //Varibles for BLS Query
         const medianAnnual = "13"
@@ -197,8 +202,7 @@ $('document').ready(function () {
                 if (blsDataTypes[i] === blsDataTypes[4]) {
                     avgPay = results;
                 }
-                const demand = '3,000';
-                const growthProjection = '4';
+              
                 console.log(medianPay);
             });
         }
@@ -206,8 +210,8 @@ $('document').ready(function () {
         const colURL = "https://notthebureauoflaborstatistics.firebaseio.com/CostOfLiving/City" + city + 
         ".json?apiKey=AIzaSyAwyehZmSt5W1AAHQwjR3xmd4k4FETcbMo"
         $.ajax({
-            url: queryUTL,
-            method: "GET" + city
+            url: queryURL,
+            method: "GET",
         }).then(function (data) {
             const rent = data.MedianTwoBedR
 
@@ -220,18 +224,16 @@ $('document').ready(function () {
             $("<td>").text(city),
             $("<td>").text(medianPay),
             $("<td>").text(avgPay),
+            $("<td>").text(''),
+            $("<td>").text(''),
+
         );
 
         // Prepend the new row to the table
         $("#results-table > tbody").prepend(newRow);
 
-        // console.log(zipCode);
-        // console.log(medianPay);
-        // console.log(avgPay);
+
 
     });
 });
-// });
-
-
 

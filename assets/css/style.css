@@ -1,0 +1,21 @@
+body{
+    background: url(../images/floor-tile.png)
+}
+.container {
+    text-align: center;
+}
+.input-field, .btn {
+    text-align: left;
+    float: left;
+}
+
+/* Table column width */
+#results-table th,
+td {
+    display: inline-block;
+    width: 16.66%;
+}
+
+#occupation-input {
+    width: 100%;
+}
