@@ -1,23 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Occupational outlook</title>
+
     <!-- jquery link -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
 
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <style>
+        .container {
+            text-align: center;
+        }
+        .input-field, .btn {
+            text-align: left;
+            float: left;
+        }
+        
+        /* Table column width */
+        #results-table th,
+        td {
+            display: inline-block;
+            width: 16.66%;
+        }
+    </style>
 </head>
-<body>
-    <input class="form-control" id="occupation" type="text" placeholder="Enter Occupation Here
-    ">
-    <button class="btn btn-primary" id="submitOccupation" type="submit">Submit</button>
 
-<!-- link to javascript logic -->
-    <script src="assets/javascript/main.js"></script>
+<body>
+
+    <div class=container>
+        <h3>Occupational Outlook</h3>
+        <h5>Major Cities - Western US</h5>
+    </div>
+
+
+    <!-- <br> -->
+    <div class=container>
+        <div class=row>
+
+            <div class="row">
+                <div class="input-field col s8">
+                    <h6>Select occupation from list below:</h6>
+                    <select id="occupation-input">
+                        <option value="" disabled selected>Choose occupation</option>
+                        <option >Carpenter</option>
+                        <option >Plumber</option>
+                        <option >Electrician</option>
+                        <option >Auto Mechanic</option>
+                        <option >Web Developer</option>
+                        <option >Database Administrator</option>
+                        <option >Welder</option>
+                        <option >Bartender</option>
+                        <option >Waiter/Waitress</option>
+                        <option >Nurse</option>
+                        <option >Doctor</option>
+                        <option >Accountant</option>
+                        <option >Real Estate Agent</option>
+
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s8">
+                    <h6>Select City from list below:</h6>
+                    <select id="city-input">
+                        <option value="" disabled selected>Choose city</option>
+                        <option >Los Angeles</option>//
+                        <option >San Jose</option>//
+                        <option >Seattle</option>//
+                        <option >Salt Lake</option>//
+                        <option >Las Vegas</option>//
+                        <option >Phoenix</option>//
+                        <option >Tucson</option>//
+                        <option >Albuquerque</option>//
+                        <option >Denver</option>//
+                        <option >Houston</option>//
+                        <option >New York</option>//
+                        <option >Montgomery</option>//
+                        <option >Washington DC</option>
+                        <option >Boston</option>
+                        <option >Dallas</option>//
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn btn-default" id="add-occupation" type="submit">Submit</button>
+           
+        </div>
+    </div>
+    
+    <!-- Setting up display area for results -->
+    <div class=container>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5>Results</h5>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-sm table-hover" id='results-table'>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Occupation </th>
+                                    <th scope="col">City </th>
+                                    <th scope="col" class="number">Median Pay </th>
+                                    <th scope="col" class="number">Average Pay</th>
+                                    <th scope="col" class="number">Demand </th>
+                                    <th scope="col">Growth % </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- New rows inserted here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- link to javascript logic -->
     <script src="assets/javascript/main.js"></script>
 
 </body>
+
 </html>
