@@ -7,14 +7,15 @@ body{
 }
 .input-field, .btn {
     text-align: left;
-    float: left;
+    /* float: left; */
+    margin-bottom: 10px;
 }
 
 /* Table column width */
 #results-table th,
 td {
     display: inline-block;
-    width: 16.66%;
+    width: 20%;
 }
 
 /* #occupation-input {
@@ -28,4 +29,6 @@ td {
 
 #resultsBox {
     margin-bottom: 0px;
+    padding-top:2px;
 }
+
