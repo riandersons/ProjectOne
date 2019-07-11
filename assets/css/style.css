@@ -1,0 +1,34 @@
+body{
+    background: url(../images/floor-tile.png)
+}
+.container {
+    text-align: center;
+    background: white;
+}
+.input-field, .btn {
+    text-align: left;
+    /* float: left; */
+    margin-bottom: 10px;
+}
+
+/* Table column width */
+#results-table th,
+td {
+    display: inline-block;
+    width: 20%;
+}
+
+/* #occupation-input {
+    width: 100%;
+}
+*/
+#style-header{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+} 
+
+#resultsBox {
+    margin-bottom: 0px;
+    padding-top:2px;
+}
+
