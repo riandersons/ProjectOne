@@ -1,5 +1,5 @@
 // Waits for page to load
-// $('document').ready(function () {
+$('document').ready(function () {
 
     //Click handlers
     // ---------------------------------------------------
@@ -143,75 +143,74 @@
         // };
         // const zipCode = zip.city;
         // console.log(zip.city);
-
-        // ------------------------------------------------------
         // ------------------------------------------------------
 
-
-        // console.log('Occupation entered:  ' + occupationInput);
-        // console.log('City entered:  ' + city);
-        // console.log('cityCode  :' + cityCode);
-        // console.log('Jobcode  :' + jobCode);
 
         /* ----------------------------------------------------------------------------------------------
             BLS AJAX Query SeriesID Syntax= concatenation of the following:
              Perfix=OE (ocupationEmplyment), SeasonalAjustment=U (unajusted), AreaType=M (metro)
              areaCode=cityCode, industryCode=000000 (all), ocupationCode=jobCode, dataType=blsDataType;
-                see https://www.bls.gov/help/hlpforma.htm#OE 
-
+                For more info, see: https://www.bls.gov/help/hlpforma.htm#OE 
         ----------------------------------------------------------------------------------------------- */
 
-
-        //Varibles for BLS Query
+        //BLS dataType Codes
         const medianAnnual = "13"
         const empPer1k = "16"
         const employment = "01"
         const locationQuotient = "17"
         const avgAnnual = "04"
-        const blsDataTypes = [medianAnnual, /*empPer1k, employment, locationQuotient, avgAnnual*/]
 
+        // Array of each dataType Code
+        const blsDataTypes = [medianAnnual, /*empPer1k, employment, locationQuotient,*/ avgAnnual]
+
+        // Loop through the array to run an ajax call for each dataType
         for (let i = 0; i < blsDataTypes.length; i++) {
+
             let blsQuery = 'https://api.bls.gov/publicAPI/v1/timeseries/data/OEUM' +
                 cityCode + "000000" + jobCode + blsDataTypes[i];
+
             $.ajax({
                 type: "POST",
                 url: blsQuery,
                 dataType: "JSON",
                 success: function (response) {
-                    // }).then(function (response) {
-                        console.log(blsQuery)
-                        console.log(response.Results.series[0].data[0].value)
-                        const results = response.Results.series[0].data[0].value;
-                        if (blsDataTypes[i] === blsDataTypes[0]) {
-                    occupation.medianPay = results;
-                }
-                // if (blsDataTypes[i] === blsDataTypes[1]) {
-                    //     occupation.empPer1000 = results;
-                    // }
-                    // if (blsDataTypes[i] === blsDataTypes[2]) {
-                        //     occupation.numberOf = results;
-                // }
-                // if (blsDataTypes[i] === blsDataTypes[3]) {
-                    //     occupation.quotient = results
-                    // }
+
+                    // const results = response.Results.series[0].data[0].value;  --> Uncomment when fixed
+
+                    const results = 'Fixed'  //Delete this line when fixed
+
+                    if (blsDataTypes[i] === blsDataTypes[0]) {
+                        occupation.medianPay = results;
+                    }
+                    
+                    // Additional Data to calculate demand
+                    /* if (blsDataTypes[i] === blsDataTypes[1]) {
+                         occupation.empPer1000 = results;
+                     }
+                     if (blsDataTypes[i] === blsDataTypes[2]) {
+                         occupation.numberOf = results;
+                     }
+                     if (blsDataTypes[i] === blsDataTypes[3]) {
+                         occupation.quotient = results
+                     }   */
+
                     if (blsDataTypes[i] === blsDataTypes[1]) {  //change index if other array indexes are uncommented
                         occupation.avgPay = results;
                     }
                 }
-                });
-            }
-        // console.log('occupation obj: ', occupation);
-        // console.log('median pay: ', occupation.medianPay);
-        // console.log('Avg Pay: ', occupation.avgPay)
-        const colURL = "https://notthebureauoflaborstatistics.firebaseio.com/CostOfLiving/City/" + city + 
-        ".json?apiKey=AIzaSyAwyehZmSt5W1AAHQwjR3xmd4k4FETcbMo"
+            });
+        }
+
+        const colURL = "https://notthebureauoflaborstatistics.firebaseio.com/CostOfLiving/City/" + city +
+            ".json?apiKey=AIzaSyAwyehZmSt5W1AAHQwjR3xmd4k4FETcbMo"
+
         $.ajax({
             url: colURL,
             method: "GET"
         }).then(function (data) {
+            
             costOfLiving.rent = data.MedianTwoBedR;
-            // console.log(costOfLiving.rent);
-            console.log('from ajax: ', occupation)
+
             // Append data to new table row
             let newRow = $("<tr>").append(
                 $("<td>").text(occupationInput),
@@ -220,12 +219,12 @@
                 $("<td>").text(occupation.avgPay),
                 $("<td>").text(costOfLiving.rent),
                 $("<td>").text('Phoenix'),
-                );
-                // Prepend the new row to the table
-                $("#results-table > tbody").prepend(newRow);
-            });
+            );
+            // Prepend the new row to the table
+            $("#results-table > tbody").prepend(newRow);
+        });
     });
 
 
-// });
+});
 
