@@ -3,19 +3,32 @@ body{
 }
 .container {
     text-align: center;
+    background: white;
 }
 .input-field, .btn {
     text-align: left;
-    float: left;
+    /* float: left; */
+    margin-bottom: 10px;
 }
 
 /* Table column width */
 #results-table th,
 td {
     display: inline-block;
-    width: 16.66%;
+    width: 20%;
 }
 
-#occupation-input {
+/* #occupation-input {
     width: 100%;
 }
+*/
+#style-header{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+} 
+
+#resultsBox {
+    margin-bottom: 0px;
+    padding-top:2px;
+}
+
