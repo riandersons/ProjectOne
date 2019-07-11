@@ -3,6 +3,7 @@ body{
 }
 .container {
     text-align: center;
+    background: white;
 }
 .input-field, .btn {
     text-align: left;
@@ -19,9 +20,12 @@ td {
 /* #occupation-input {
     width: 100%;
 }
-
+*/
 #style-header{
-    background-size:cover;
-    background-color: rgba(100,100,100, 0.5);
-    color: inherit;
-} */
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+} 
+
+#resultsBox {
+    margin-bottom: 0px;
+}
