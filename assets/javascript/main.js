@@ -156,35 +156,43 @@ $('document').ready(function () {
         //BLS dataType Codes
         const medianAnnual = "13"
         const empPer1k = "16"
-        const employment = "01"
+        const totalEmployed = "01"
         const locationQuotient = "17"
         const avgAnnual = "04"
 
         // Array of each dataType Code
-        const blsDataTypes = [medianAnnual, /*empPer1k, employment, locationQuotient,*/ avgAnnual]
+        const blsDataTypes = [medianAnnual, /*empPer1k, employment, locationQuotient, avgAnnual*/]
+
+
+        const colURL = "https://notthebureauoflaborstatistics.firebaseio.com/CostOfLiving/City/" + 
+            city + ".json?apiKey=AIzaSyAwyehZmSt5W1AAHQwjR3xmd4k4FETcbMo";
 
         // Loop through the array to run an ajax call for each dataType
         for (let i = 0; i < blsDataTypes.length; i++) {
 
-            let blsQuery = 'https://api.bls.gov/publicAPI/v1/timeseries/data/OEUM' +
-                cityCode + "000000" + jobCode + blsDataTypes[i];
+            let blsQuery = 'https://api.bls.gov/publicAPI/v2/timeseries/data/OEUM' +
+            cityCode + "000000" + jobCode + blsDataTypes[i] +"?registrationkey=44ac302872a44634a6809cf464899d3e";
 
             $.ajax({
                 type: "POST",
-                url: blsQuery,
+                url: blsQuery ,
                 dataType: "JSON",
                 success: function (response) {
-
-                    // const results = response.Results.series[0].data[0].value;  --> Uncomment when fixed
-
-                    const results = 'Fixed'  //Delete this line when fixed
+                    console.log(blsQuery)
+                    
+                    const results = response.Results.series[0].data[0].value;
+                    console.log(results)
+                    // const results = 'Fixed'  //Delete this line when fixed
 
                     if (blsDataTypes[i] === blsDataTypes[0]) {
+                        console.log(results)
                         occupation.medianPay = results;
+                        console.log("1 ", occupation.medianPay)
                     }
+                    console.log("2 ", occupation.medianPay)
                     
-                    // Additional Data to calculate demand
-                    /* if (blsDataTypes[i] === blsDataTypes[1]) {
+                    /* 
+                    if (blsDataTypes[i] === blsDataTypes[1]) {
                          occupation.empPer1000 = results;
                      }
                      if (blsDataTypes[i] === blsDataTypes[2]) {
@@ -192,7 +200,8 @@ $('document').ready(function () {
                      }
                      if (blsDataTypes[i] === blsDataTypes[3]) {
                          occupation.quotient = results
-                     }   */
+                     }   
+                     */
 
                     if (blsDataTypes[i] === blsDataTypes[1]) {  //change index if other array indexes are uncommented
                         occupation.avgPay = results;
@@ -200,17 +209,14 @@ $('document').ready(function () {
                 }
             });
         }
-
-        const colURL = "https://notthebureauoflaborstatistics.firebaseio.com/CostOfLiving/City/" + city +
-            ".json?apiKey=AIzaSyAwyehZmSt5W1AAHQwjR3xmd4k4FETcbMo"
-
+        console.log("3 ", occupation.medianPay)
         $.ajax({
             url: colURL,
             method: "GET"
         }).then(function (data) {
-            
+            const colData = data
             costOfLiving.rent = data.MedianTwoBedR;
-
+            console.log("4 ", occupation.medianPay)
             // Append data to new table row
             let newRow = $("<tr>").append(
                 $("<td>").text(occupationInput),
@@ -218,7 +224,7 @@ $('document').ready(function () {
                 $("<td>").text(occupation.medianPay),
                 $("<td>").text(occupation.avgPay),
                 $("<td>").text(costOfLiving.rent),
-                $("<td>").text('Phoenix'),
+                // $("<td>").text('Phoenix'),
             );
             // Prepend the new row to the table
             $("#results-table > tbody").prepend(newRow);
