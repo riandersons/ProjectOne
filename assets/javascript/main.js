@@ -7,11 +7,11 @@ $('document').ready(function () {
     $('select').formSelect();
     // -----------------------------------------------------
 
+    // Objects to hold data retrieved from ajax query
     let occupation = {
-        medianPay: '$',
-        avgPay: '$'
+        medianPay: '',
+        avgPay: ''
     };
-
     let costOfLiving = {};
 
 
@@ -145,15 +145,15 @@ $('document').ready(function () {
         const totalEmployed = "01"
         const locationQuotient = "17"
         const avgAnnual = "04"
-
         // Array of each dataType Code
         const blsDataTypes = [medianAnnual, /*empPer1k, employment, locationQuotient,*/ avgAnnual]
 
 
+        // Query URL for Cost of Living Data
         const colURL = "https://notthebureauoflaborstatistics.firebaseio.com/CostOfLiving/City/" +
             city + ".json?apiKey=AIzaSyAwyehZmSt5W1AAHQwjR3xmd4k4FETcbMo";
 
-        
+        //Function to fetch data from ajax calls
         function getData() {
             $.ajax({
                 url: colURL,
@@ -164,7 +164,8 @@ $('document').ready(function () {
 
                 // Loop through the array to run an ajax call for each dataType
                 for (let i = 0; i < blsDataTypes.length; i++) {
-                    
+
+                    //Query URL for Bureau of Labor Statistics data
                     let blsQuery = 'https://api.bls.gov/publicAPI/v2/timeseries/data/OEUM' +
                         cityCode + "000000" + jobCode + blsDataTypes[i] + "?registrationkey=44ac302872a44634a6809cf464899d3e";
 
@@ -173,11 +174,12 @@ $('document').ready(function () {
                         url: blsQuery,
                         dataType: "JSON",
                         success: function (response) {
-        
-                            const results = response.Results.series[0].data[0].value;                           
+
+                            const results = response.Results.series[0].data[0].value;
 
                             if (blsDataTypes[i] === blsDataTypes[0]) {
-                                occupation.medianPay = results;                                
+                                occupation.medianPay = results;
+                                $("#Median-Pay").text("$" + results)
                             }
                             /* 
                             if (blsDataTypes[i] === blsDataTypes[1]) {
@@ -192,31 +194,29 @@ $('document').ready(function () {
                              */
                             if (blsDataTypes[i] === blsDataTypes[1]) {  //change index if other array indexes are uncommented
                                 occupation.avgPay = results;
+                                $("#Average-Pay").text("$" + results)
                             }
                         }
                     });
                 }
-            }).done(function () { 
+            }).done(function () {
                 // Append data to new table row
                 let newRow = $("<tr>").append(
                     $("<td>").text(occupationInput),
                     $("<td>").text(city),
-                    $("<td>").text(occupation.medianPay),
-                    $("<td>").text(occupation.avgPay),
+                    $("<td>").attr("id", "Median-Pay"),
+                    $("<td>").attr("id", "Average-Pay"),
                     $("<td>").text(costOfLiving.rent),
-                    );
-                    // Prepend the new row to the table
-                    $("#results-table > tbody").prepend(newRow)
+                );
+                // Prepend the new row to the table
+                $("#results-table > tbody").prepend(newRow)
+                $("#Median-Pay").text("Caluculating...")
+                $("#Average-Pay").text("Caluculating...")
             });
         }
-
+        // Call function to fetch data and add results to page
         getData()
-        // addRow()
-        
-
     });
-
-    
 
 });
 
