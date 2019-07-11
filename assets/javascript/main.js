@@ -7,15 +7,12 @@ $('document').ready(function () {
     $('select').formSelect();
     // -----------------------------------------------------
 
-    const medianPay = '';
-    const empPer1000 = '';
-    const numberOf = '';
-    const quotient = '';
+    let occupation = {
+        medianPay: '$',
+        avgPay: '$'
+    };
 
-
-    const avgPay = '';
-
-
+    let costOfLiving = {};
 
 
     //  Submit button listener
@@ -23,8 +20,9 @@ $('document').ready(function () {
         //prevents page from reloading on form submit
         event.preventDefault();
 
+
         //pull information from form and build the query URL
-        const occupationInput = $('#occupation-input').val().trim();
+        const occupationInput = $('#occupation-input').val();
         const city = $("#city-input").val().trim();
         let zipCode = 0;
         let jobCode = '';
@@ -132,7 +130,6 @@ $('document').ready(function () {
         else if (occupationInput === 'Real Estate Agent') {
             jobCode = '419022';
         }
-
         else formSelect();
 
 
@@ -146,98 +143,88 @@ $('document').ready(function () {
         // };
         // const zipCode = zip.city;
         // console.log(zip.city);
-
-        // ------------------------------------------------------
         // ------------------------------------------------------
 
-
-        console.log('Occupation entered:  ' + occupationInput);
-        console.log('City entered:  ' + city);
-        console.log('cityCode  :' + cityCode);
-        console.log('Jobcode  :' + jobCode);
 
         /* ----------------------------------------------------------------------------------------------
             BLS AJAX Query SeriesID Syntax= concatenation of the following:
              Perfix=OE (ocupationEmplyment), SeasonalAjustment=U (unajusted), AreaType=M (metro)
              areaCode=cityCode, industryCode=000000 (all), ocupationCode=jobCode, dataType=blsDataType;
-                see https://www.bls.gov/help/hlpforma.htm#OE 
-
+                For more info, see: https://www.bls.gov/help/hlpforma.htm#OE 
         ----------------------------------------------------------------------------------------------- */
 
-
-        //Varibles for BLS Query
+        //BLS dataType Codes
         const medianAnnual = "13"
         const empPer1k = "16"
         const employment = "01"
         const locationQuotient = "17"
         const avgAnnual = "04"
-        const blsDataTypes = [medianAnnual, empPer1k, employment, locationQuotient, avgAnnual]
 
-        // for (let i = 0; i < blsDataTypes.length; i++) {
-        //     let blsQuery = 'https://api.bls.gov/publicAPI/v1/timeseries/data/OEUM' +
-        //         cityCode + "000000" + jobCode + blsDataTypes[i];
-        //     $.ajax({
-        //         type: "POST",
-        //         url: blsQuery,
-        //         dataType: "JSON",
-        //         // success: function (response) {
-        //         //     console.log(blsDataTypes[i], response.status, response.message)
-        //         //     console.log(response.Results.series)
-        //         // }
-        //     }).then(function (response) {
-        //         console.log(blsQuery)
-        //         const results = response.Results.series[0].data[0].value;
-        //         if (blsDataTypes[i] === blsDataTypes[0]) {
-        //             medianPay = results;
-        //         }
-        //         if (blsDataTypes[i] === blsDataTypes[1]) {
-        //             empPer1000 = results;
-        //         }
-        //         if (blsDataTypes[i] === blsDataTypes[2]) {
-        //             numberOf = results;
-        //         }
-        //         if (blsDataTypes[i] === blsDataTypes[3]) {
-        //             quotient = results
-        //         }
-        //         if (blsDataTypes[i] === blsDataTypes[4]) {
-        //             avgPay = results;
-        //         }
-        //         const demand = '3,000';
-        //         const growthProjection = '4';
-        //         console.log(medianPay);
-        //     });
-        // }
+        // Array of each dataType Code
+        const blsDataTypes = [medianAnnual, /*empPer1k, employment, locationQuotient,*/ avgAnnual]
 
-        const colURL = "https://notthebureauoflaborstatistics.firebaseio.com/CostOfLiving/City/" + city + 
-        ".json?apiKey=AIzaSyAwyehZmSt5W1AAHQwjR3xmd4k4FETcbMo"
+        // Loop through the array to run an ajax call for each dataType
+        for (let i = 0; i < blsDataTypes.length; i++) {
+
+            let blsQuery = 'https://api.bls.gov/publicAPI/v1/timeseries/data/OEUM' +
+                cityCode + "000000" + jobCode + blsDataTypes[i];
+
+            $.ajax({
+                type: "POST",
+                url: blsQuery,
+                dataType: "JSON",
+                success: function (response) {
+
+                    // const results = response.Results.series[0].data[0].value;  --> Uncomment when fixed
+
+                    const results = 'Fixed'  //Delete this line when fixed
+
+                    if (blsDataTypes[i] === blsDataTypes[0]) {
+                        occupation.medianPay = results;
+                    }
+                    
+                    // Additional Data to calculate demand
+                    /* if (blsDataTypes[i] === blsDataTypes[1]) {
+                         occupation.empPer1000 = results;
+                     }
+                     if (blsDataTypes[i] === blsDataTypes[2]) {
+                         occupation.numberOf = results;
+                     }
+                     if (blsDataTypes[i] === blsDataTypes[3]) {
+                         occupation.quotient = results
+                     }   */
+
+                    if (blsDataTypes[i] === blsDataTypes[1]) {  //change index if other array indexes are uncommented
+                        occupation.avgPay = results;
+                    }
+                }
+            });
+        }
+
+        const colURL = "https://notthebureauoflaborstatistics.firebaseio.com/CostOfLiving/City/" + city +
+            ".json?apiKey=AIzaSyAwyehZmSt5W1AAHQwjR3xmd4k4FETcbMo"
+
         $.ajax({
             url: colURL,
             method: "GET"
         }).then(function (data) {
-            const rent = data.MedianTwoBedR
-            console.log(data)
+            
+            costOfLiving.rent = data.MedianTwoBedR;
 
-
-            // Add stuff from Marco's Branch here
-        
+            // Append data to new table row
+            let newRow = $("<tr>").append(
+                $("<td>").text(occupationInput),
+                $("<td>").text(city),
+                $("<td>").text(occupation.medianPay),
+                $("<td>").text(occupation.avgPay),
+                $("<td>").text(costOfLiving.rent),
+                $("<td>").text('Phoenix'),
+            );
+            // Prepend the new row to the table
+            $("#results-table > tbody").prepend(newRow);
         });
-
-        // Append data to new table row
-        let newRow = $("<tr>").append(
-            $("<td>").text(occupationInput),
-            $("<td>").text(city),
-            $("<td>").text(medianPay),
-            $("<td>").text(avgPay),
-            $("<td>").text(''),
-            $("<td>").text(''),
-
-        );
-
-        // Prepend the new row to the table
-        $("#results-table > tbody").prepend(newRow);
-
-
-
     });
+
+
 });
 
