@@ -1,5 +1,5 @@
 ###### Project One
-# [JCI Project](https://www.github.com/WeNeedToPutTheURLHere)
+# [JCI Project](https://riandersons.github.io/ProjectOne/)
 
 ## Brought to You By: The Majestic Nova Wrangles
 
