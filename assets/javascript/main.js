@@ -11,7 +11,10 @@ $('document').ready(function () {
     const empPer1000 = '';
     const numberOf = '';
     const quotient = '';
+
+
     const avgPay = '';
+
 
 
 
@@ -32,7 +35,7 @@ $('document').ready(function () {
             zipCode = 85001;
             cityCode = '0038060'
         }
-        else if (city === "Los Angeles") {
+        else if (city === "Los_Angeles") {
             zipCode = 90001;
             cityCode = '0031080'
         }
@@ -158,7 +161,9 @@ $('document').ready(function () {
              Perfix=OE (ocupationEmplyment), SeasonalAjustment=U (unajusted), AreaType=M (metro)
              areaCode=cityCode, industryCode=000000 (all), ocupationCode=jobCode, dataType=blsDataType;
                 see https://www.bls.gov/help/hlpforma.htm#OE 
+
         ----------------------------------------------------------------------------------------------- */
+
 
         //Varibles for BLS Query
         const medianAnnual = "13"
@@ -168,50 +173,53 @@ $('document').ready(function () {
         const avgAnnual = "04"
         const blsDataTypes = [medianAnnual, empPer1k, employment, locationQuotient, avgAnnual]
 
-        for (let i = 0; i < blsDataTypes.length; i++) {
-            let blsQuery = 'https://api.bls.gov/publicAPI/v1/timeseries/data/OEUM' +
-                cityCode + "000000" + jobCode + blsDataTypes[i];
-            $.ajax({
-                type: "POST",
-                url: blsQuery,
-                dataType: "JSON",
-                // success: function (response) {
-                //     console.log(blsDataTypes[i], response.status, response.message)
-                //     console.log(response.Results.series)
-                // }
-            }).then(function (response) {
-                console.log(blsQuery)
-                const results = response.Results.series[0].data[0].value;
-                if (blsDataTypes[i] === blsDataTypes[0]) {
-                    medianPay = results;
-                }
-                if (blsDataTypes[i] === blsDataTypes[1]) {
-                    empPer1000 = results;
-                }
-                if (blsDataTypes[i] === blsDataTypes[2]) {
-                    numberOf = results;
-                }
-                if (blsDataTypes[i] === blsDataTypes[3]) {
-                    quotient = results
-                }
-                if (blsDataTypes[i] === blsDataTypes[4]) {
-                    avgPay = results;
-                }
-                const demand = '3,000';
-                const growthProjection = '4';
-                console.log(medianPay);
-            });
-        }
+        // for (let i = 0; i < blsDataTypes.length; i++) {
+        //     let blsQuery = 'https://api.bls.gov/publicAPI/v1/timeseries/data/OEUM' +
+        //         cityCode + "000000" + jobCode + blsDataTypes[i];
+        //     $.ajax({
+        //         type: "POST",
+        //         url: blsQuery,
+        //         dataType: "JSON",
+        //         // success: function (response) {
+        //         //     console.log(blsDataTypes[i], response.status, response.message)
+        //         //     console.log(response.Results.series)
+        //         // }
+        //     }).then(function (response) {
+        //         console.log(blsQuery)
+        //         const results = response.Results.series[0].data[0].value;
+        //         if (blsDataTypes[i] === blsDataTypes[0]) {
+        //             medianPay = results;
+        //         }
+        //         if (blsDataTypes[i] === blsDataTypes[1]) {
+        //             empPer1000 = results;
+        //         }
+        //         if (blsDataTypes[i] === blsDataTypes[2]) {
+        //             numberOf = results;
+        //         }
+        //         if (blsDataTypes[i] === blsDataTypes[3]) {
+        //             quotient = results
+        //         }
+        //         if (blsDataTypes[i] === blsDataTypes[4]) {
+        //             avgPay = results;
+        //         }
+        //         const demand = '3,000';
+        //         const growthProjection = '4';
+        //         console.log(medianPay);
+        //     });
+        // }
 
-        const colURL = "https://notthebureauoflaborstatistics.firebaseio.com/CostOfLiving/City" + city + 
+        const colURL = "https://notthebureauoflaborstatistics.firebaseio.com/CostOfLiving/City/" + city + 
         ".json?apiKey=AIzaSyAwyehZmSt5W1AAHQwjR3xmd4k4FETcbMo"
         $.ajax({
-            url: queryURL,
-            method: "GET" 
+            url: colURL,
+            method: "GET"
         }).then(function (data) {
             const rent = data.MedianTwoBedR
+            console.log(data)
+
 
             // Add stuff from Marco's Branch here
+        
         });
 
         // Append data to new table row
@@ -220,18 +228,16 @@ $('document').ready(function () {
             $("<td>").text(city),
             $("<td>").text(medianPay),
             $("<td>").text(avgPay),
+            $("<td>").text(''),
+            $("<td>").text(''),
+
         );
 
         // Prepend the new row to the table
         $("#results-table > tbody").prepend(newRow);
 
-        // console.log(zipCode);
-        // console.log(medianPay);
-        // console.log(avgPay);
+
 
     });
 });
-// });
-
-
 
